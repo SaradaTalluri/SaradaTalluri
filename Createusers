@@ -1,0 +1,16 @@
+employees[i++]= $3;
+firstname[j++]= $1;
+lastname[k++]= $2;
+dept[n++]= $4;
+password=$5;
+}END { for (indx in employees){
+        userid= employees[indx];
+        if (dept[indx] ~ /Manager/) {
+                system("sudo useradd -m '"userid"' -c '"firstname[indx]" "lastname[indx]" "dept[indx]"'");
+                system("echo '"userid"':'"password"' | sudo chpasswd");
+}       else{
+                system("sudo useradd -m '"userid"' -c '"firstname[indx]" "lastname[indx]" "dept[indx]"' -e '"date"'");
+                system("echo '"userid"':'"password"' | sudo chpasswd")
+}
+}
+}
